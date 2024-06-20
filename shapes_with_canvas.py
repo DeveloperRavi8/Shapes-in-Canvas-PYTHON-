@@ -6,16 +6,82 @@ root = Tk()
 root.title("Shapes in Canvas In Python Project 166")
 root.geometry("1000x700")
 root.configure(bg="teal")
+# GLOBAL VAIRABLES #
 
+keypress = ""
+
+# DEFINING SHAPES FUNCTIONS  #
+
+def circle(event):
+    print("circle")
+    global keypress
+
+    keypress = "c"
+
+    startX = startXVal.get()
+    startY = startYVal.get()
+    endX = endXVal.get()
+    endY = endYVal.get()
+
+    draw(keypress, startX, startY, endX, endY)
+
+
+def rectangle(event):
+    print("rectangle")
+    global keypress
+    keypress = "r"
+
+    startX = startXVal.get()
+    startY = startYVal.get()
+    endX = endXVal.get()
+    endY = endYVal.get()
+
+    draw(keypress, startX, startY, endX, endY)
+
+
+def line(event):
+    print("line")
+    global keypress
+    keypress = "l"
+
+    startX = startXVal.get()
+    startY = startYVal.get()
+    endX = endXVal.get()
+    endY = endYVal.get()
+
+    draw(keypress, startX, startY, endX, endY)
+
+
+def draw(keypress, startX, startY, endX, endY):
+    print(keypress, startX, startY, endX, endY)
+
+    fill_color = ColorValue.get()
+
+    if(keypress == "c"):
+        canvas.create_oval(startX, startY, endX, endY, width=3, fill=fill_color)
+    if(keypress == "r"):
+        canvas.create_rectangle(startX, startY, endX, endY, width=3, fill=fill_color)
+    if(keypress == "l"):
+        canvas.create_line(startX, startY, endX, endY, width=3, fill=fill_color)
+
+
+# BINDING KEYS TO ROOT || ADDING LISITNERS TO KEYS #
+
+root.bind("<c>", circle)
+root.bind("<r>", rectangle)
+root.bind("<l>", line)
+
+
+# UI PART #
 canvas = Canvas(root, height="570", width="1000", background="white")
 canvas.pack()
 
 label = Label(root, text="Start X: ")
 label.place(relx=0.095, rely=0.85, anchor=CENTER)
 
-startxList = [100, 200, 300, 400, 500, 600, 700, 800]
-startxVal = StringVar()
-combobox = ttk.Combobox(root, values=startxList, textvariable=startxVal)
+startXList = [100, 200, 300, 400, 500, 600, 700, 800]
+startXVal = StringVar()
+combobox = ttk.Combobox(root, values=startXList, textvariable=startXVal)
 combobox.place(relx=0.2, rely=0.85, anchor=CENTER)
 
 
